@@ -4,7 +4,7 @@ The purpose of `bridge_principles.py` is to provide tools for moving from a prob
 
 Probabilistic beliefs are represented here through a [Bayesian Network](https://en.wikipedia.org/wiki/Bayesian_network). All you need to do is set up a Bayesian network to represent an agent's belief state and `possible_belief_sets` will tell you which states of affairs (i.e. which possible worlds) the agent in question can believe are possible according to Leitgeb's proposal.
 
-See `ex.py` for an example. An explainer on what's going on in `ex.py` is forthcoming.
+See `ex.py` for an example. `Example.pdf` provides an explanation of what is illustrated by `ex.py`.
 
 ## Dependencies
 
@@ -19,4 +19,4 @@ It will probably be necessary to read through the `pgmpy` documentation to get a
 
 Leitgeb, Hannes (2013). [Reducing belief simpliciter to degrees of belief](http://www.sciencedirect.com/science/article/pii/S0168007213000845). _Annals of Pure and Applied Logic_, 164(12):1338–1389.
 
-Leitgeb, Hannes (2015). [Belief and Degrees of Belief](https://www.aristoteliansociety.org.uk/the-joint-session/the-2015-joint-session/hannes-leitgeb-richard-pettigrew/). _Proceedings of the Aristotelian Society Supplementary Volume_, 89(1): 143-185.
+Leitgeb, Hannes (2015). [The Humean thesis on belief](https://www.aristoteliansociety.org.uk/the-joint-session/the-2015-joint-session/hannes-leitgeb-richard-pettigrew/). _Proceedings of the Aristotelian Society Supplementary Volume_, 89(1): 143-185.
