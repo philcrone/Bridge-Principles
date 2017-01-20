@@ -38,48 +38,29 @@ def joint_prob (truth_values, mod, inf):
 		return phi_query[variable].values[truth_values[variable]] * joint_prob(evidence, mod, inf)
 
 def possible_worlds (propositions, mod, inf):
-	worlds = {}
-	truth_values = itertools.product([0,1],repeat = len(propositions))
-	i = 1
-	for value in truth_values:
-		world_name = 'w%s' % i
-		prop_set = dict(zip(propositions,value))
-		if is_consistent(prop_set, inf):
-			worlds[world_name] = prop_set
-			worlds[world_name]['prob'] = joint_prob(prop_set, mod, inf)
-			i += 1
-	return worlds
-
-def sort(array):
-    """Quicksort implementation"""
-    less = []
-    equal = []
-    greater = []
-
-    if len(array) > 1:
-        pivot = array[0][1]
-        for x in array:
-            if x[1] < pivot:
-                less.append(x)
-            if x[1] == pivot:
-                equal.append(x)
-            if x[1] > pivot:
-                greater.append(x)
-        return sort(greater)+equal+sort(less)
-    else:
-        return array
+    worlds = {}
+    truth_values = itertools.product([0,1],repeat = len(propositions))
+    i = 1
+    for value in truth_values:
+        world_name = 'w%s' % i
+        prop_set = dict(zip(propositions,value))
+        if is_consistent(prop_set, inf):
+            worlds[world_name] = prop_set
+            worlds[world_name]['prob'] = joint_prob(prop_set, mod, inf)
+            i += 1
+    return worlds
 
 def possible_belief_sets (propositions, mod, inf):
-	worlds = possible_worlds(propositions, mod, inf)
-	world_probs = []
-	for w in worlds:
-		world_probs.append((w,worlds[w]['prob']))
-	world_probs = sort(world_probs)
+    worlds = possible_worlds(propositions, mod, inf)
+    world_probs = []
+    for w in worlds:
+        world_probs.append((w,worlds[w]['prob']))
+    world_probs = sorted(world_probs, key = lambda x: x[1], reverse = True)
 
-	belief_sets = []
-	temp_set = []
-	for w in world_probs:
-		temp_set.append(w[0])
-		if w[1] > sum([v[1] for v in world_probs[world_probs.index(w) + 1:]]):
-			belief_sets.append(copy.copy(temp_set))
-	return belief_sets
+    belief_sets = []
+    temp_set = []
+    for w in world_probs:
+        temp_set.append(w[0])
+        if w[1] > sum([v[1] for v in world_probs[world_probs.index(w) + 1:]]):
+            belief_sets.append(copy.copy(temp_set))
+    return belief_sets
